@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linux-tweet-app
+  namespace: develop
+spec:
+  selector:
+    matchLabels:
+      app: linux-tweet-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: linux-tweet-app
+    spec:
+      containers:
+      - name: linux-tweet-app-container
+        image: abhilashindulkar/linux-tweet-app:v0.01
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: registrycreds
