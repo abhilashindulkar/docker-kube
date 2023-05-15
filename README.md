@@ -20,6 +20,13 @@ To view image: `docker images` or `docker image ls`
 
 To view containers (running/stopped): `docker ps -a`
 
+Tag/Pull/Push:
+To tag the image: `docker tag linux-tweet-app:v0.01 abhilashindulkar/linux-tweet-app:v0.01`
+
+To pull the image: `docker pull abhilashindulkar/linux-tweet-app:v0.01`
+
+To push the image: `docker push abhilashindulkar/linux-tweet-app:v0.01`
+
 Cleanup:
 To delete specific container: `docker rm -f <container-id>`
 
@@ -28,4 +35,13 @@ To remove all running/stopped containers: `docker container prune`
 Refer deployed_image.png for successful deployed image.
 
 ---
+
+## Linux Tweet App Deployment through Kubernetes
+
+Create a secret to pull/push image into hub.docker.com repository:
+kubectl create secret docker-registry registrycreds --docker-server=https://index.docker.io/v1/ --docker-username=user --docker-password=password --docker-email=abc-xyz@gmail.com  
+
+
+Deploy/Service Apply:
+To apply all the manifests within namespace develop: `kubectl apply -f k8s/`
 
