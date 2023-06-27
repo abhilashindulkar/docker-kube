@@ -41,6 +41,9 @@ Hang tight while we grab the latest from your chart repositories...
 ...Successfully got an update from the "bitnami" chart repository
 Update Complete. ⎈Happy Helming!⎈
 
+`helm upgrade mysql bitnami/mysql --set image.pullPolicy=Always`
+Imperative command to upgrade app/chart.
+
 `helm upgrade mysql bitnami/mysql --values values.yaml`
 Upgrade to latest version chart.
 
@@ -55,3 +58,63 @@ Dry-run to check if the chart is deployable.
 
 `helm template mysql bitnami/mysql --values values.yaml`
 Generates YAML templates for kubernetes deployment.
+
+`helm get notes mysql`
+Get release notes for deployed app through helm chart.
+
+`helm get values mysql`
+Get user supplied values for the specified chart.
+
+`helm get values mysql --all`
+Get all predefined values for the specified chart.
+
+`helm get values mysql --revision 1`
+Get user supplied values for the specified chart in revision(version) 1.
+
+`helm get manifest mysql --revision 1`
+Get k8s objects manifest for the specified chart in revision(version) 1.
+
+`helm history mysql`
+REVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION     
+1               Tue Jun 27 15:47:42 2023        deployed        mysql-9.10.4    8.0.33          Install complete
+
+`helm rollback mysql 1`
+Rollback was a success! Happy Helming!
+EVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION     
+1               Tue Jun 27 15:47:42 2023        superseded      mysql-9.10.4    8.0.33          Install complete
+2               Tue Jun 27 16:13:46 2023        superseded      mysql-9.10.4    8.0.33          Upgrade complete
+3               Tue Jun 27 16:16:43 2023        deployed        mysql-9.10.4    8.0.33          Rollback to 1
+
+`helm install apache bitnami/apache -n test-ns --create-namespace`
+Creates Namespace, Installs apache chart.
+
+`helm upgrade --install apache bitnami/apache`
+Upgrade if already installed or just install. Useful in CI/CD.
+
+`helm install bitnami/apache --generate-name --name-template "webserver-{{randAlpha 7 | lower}}"`
+Generate name, template with lower, random alphabets for chart.
+
+`helm install apache bitnami/apache --wait --timeout 7m`
+Default wait time is 5m. timeout is set to 7m. Measures to mark deployment healthy/unhealthy. Includes image pull, deployment status.
+
+`helm install apache bitnami/apache --atomic`
+Avoid failure, rollbacks to previous successful revision. Useful in CI/CD.
+
+`helm upgrade tomcat bitnami/tomcat --force`
+Delete existing deployment, deploys new one, create pods. It will have downtime.
+
+`helm upgrade tomcat bitnami/tomcat --cleanup-on-failure`
+Not good for debugging, cleans up failed upgrade.
+
+`helm uninstall $(helm list | awk 'NF=1' | awk 'NR>=2')`
+release "apache-1687884819" uninstalled
+release "mysql" uninstalled
+release "webserver-xizkwcb" uninstalled
+
+---
+
+`helm create demo-chart`
+Creates a custom chart with default nginx configuration.
+
+`helm install demo-chart ./demo-chart/`
+Installs demo-chart.
