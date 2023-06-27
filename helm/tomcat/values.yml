@@ -1,0 +1,5 @@
+tomcatPassword: "1234"
+service:
+  type: "NodePort"
+  nodePorts:
+    http: 30070
