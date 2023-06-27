@@ -6,8 +6,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 82
-    nodePort: 30007
+  - port: 80
+    # nodePort: 30007
     targetPort: 80
   selector:
     app: linux-tweet-app
