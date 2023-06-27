@@ -1,4 +1,4 @@
-#### Commands Ref
+#### Commands Reference
 
 `helm version`
 version.BuildInfo{Version:"v3.9.3", GitCommit:"414ff28d4029ae8c8b05d62aa06c7fe3dee2bc58", GitTreeState:"clean", GoVersion:"go1.17.13"}
@@ -22,3 +22,36 @@ bitnami/mariadb-galera  7.3.2           10.6.8          MariaDB Galera is a mult
 
 `helm repo remove bitnami`
 "bitnami" has been removed from your repositories
+
+`helm install mysql bitnami/mysql -n temp`
+To install MySQL in specific namespace.
+
+`helm list -n temp`
+NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+mysql   temp            1               2023-06-27 12:04:01.063933022 +0000 UTC deployed        mysql-9.10.4    8.0.33
+
+`helm uninstall mysql -n temp`
+release "mysql" uninstalled
+
+`helm install mysql bitnami/mysql --values values.yaml`
+With custom configuration.
+
+`helm repo update`
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "bitnami" chart repository
+Update Complete. ⎈Happy Helming!⎈
+
+`helm upgrade mysql bitnami/mysql --values values.yaml`
+Upgrade to latest version chart.
+
+`helm upgrade mysql bitnami/mysql --reuse-values`
+To reuse the values config while upgrading.
+
+`helm uninstall mysql --keep-history`
+Uninstall chart and retain version history.
+
+`helm install mysql bitnami/mysql --dry-run`
+Dry-run to check if the chart is deployable.
+
+`helm template mysql bitnami/mysql --values values.yaml`
+Generates YAML templates for kubernetes deployment.
