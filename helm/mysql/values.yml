@@ -3,3 +3,5 @@ auth:
   database: "temp-db"
   username: "temp-user"
   password: "temp123"
+image:
+  pullPolicy: "Always"
