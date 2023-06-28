@@ -118,3 +118,15 @@ Creates a custom chart with default nginx configuration.
 
 `helm install demo-chart ./demo-chart/`
 Installs demo-chart.
+
+`helm package demo-chart`
+Successfully packaged chart and saved it to: ./demo-chart-0.1.0.tgz
+
+`helm package demo-chart -u`
+Packages helm chart but updates dependencies(other charts) first.
+
+`helm lint demo-chart`
+==> Linting demo-chart - Checks syntax for all the template within chart.
+[INFO] Chart.yaml: icon is recommended
+1 chart(s) linted, 0 chart(s) failed
+
