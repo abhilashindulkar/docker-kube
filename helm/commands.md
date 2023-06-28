@@ -129,3 +129,4 @@ Packages helm chart but updates dependencies(other charts) first.
 ==> Linting demo-chart - Checks syntax for all the template within chart.
 [INFO] Chart.yaml: icon is recommended
 1 chart(s) linted, 0 chart(s) failed
+
