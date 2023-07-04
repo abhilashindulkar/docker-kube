@@ -1,41 +1,16 @@
-# Practice Start below kind.
 apiVersion: apps/v1
 kind: Deployment
-  tempData: {{- include "demo-chart.myTemplate" . }}
-{{- if .Values.mydata.flag -}}
-{{- "Print secret data" -}}
-{{- with .Values.mydata.keywords }}
-keywords:
-  {{- toYaml . | nindent 2 }}
-{{- end }}
-{{- else }}
-{{ .Values.mydata.data | nindent 2 }}
-{{- end }}
-
-{{- $sDT:= .Values.somemoredata -}}
-{{- $sDT }}
-
-countriesofDeployment:
-{{- range .Values.loopdata }}
-  - {{ . | upper | quote }}
-{{- end }}
-
-{{- range $key,$value := .Values.image }}
-  - {{ $key }}: {{ $value | upper}}
-{{- end }}
-# Practice End.
-
 metadata:
-  name: {{ include "demo-chart.fullname" . }}
+  name: {{ include "couponservice.fullname" . }}
   labels:
-    {{- include "demo-chart.labels" . | nindent 4 }}
+    {{- include "couponservice.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "demo-chart.selectorLabels" . | nindent 6 }}
+      {{- include "couponservice.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -43,13 +18,12 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "demo-chart.selectorLabels" . | nindent 8 }}
+        {{- include "couponservice.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "demo-chart.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -59,17 +33,17 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
+            - name: tomcat
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /actuator/health/liveness
+              port: tomcat
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: /actuator/health/readiness
+              port: tomcat
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

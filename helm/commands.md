@@ -6,7 +6,7 @@ version.BuildInfo{Version:"v3.9.3", GitCommit:"414ff28d4029ae8c8b05d62aa06c7fe3d
 `helm repo add bitnami https://charts.bitnami.com/bitnami`
 "bitnami" has been added to your repositories
 
-`helm repo list`
+`helm repo list` or `helm repo ls`
 NAME    URL                               
 bitnami https://charts.bitnami.com/bitnami
 
@@ -40,6 +40,7 @@ With custom configuration.
 Hang tight while we grab the latest from your chart repositories...
 ...Successfully got an update from the "bitnami" chart repository
 Update Complete. ⎈Happy Helming!⎈
+Clears local cache and pulls the latest chart from the configured repo.
 
 `helm upgrade mysql bitnami/mysql --set image.pullPolicy=Always`
 Imperative command to upgrade app/chart.
@@ -130,3 +131,73 @@ Packages helm chart but updates dependencies(other charts) first.
 [INFO] Chart.yaml: icon is recommended
 1 chart(s) linted, 0 chart(s) failed
 
+`helm dependency update demo-chart`
+Updates chart with dependencies.
+
+`helm test app-release`
+Tests app release with helm hook test.
+
+`helm repo index charts-repo/`
+Generates index.yaml for local chart repository. Can be used after packaging other chart in local repo.
+
+---
+
+`python3 -m http.server --bind 127.0.0.1 8080`
+Hosts chart repo on web server.
+
+`helm repo add local-repo http://localhost:8080`
+Adds local-repo to the list of chart repositories.
+
+`helm install second-chart local-repo/second-chart`
+Installs local-repo's second-chart.
+
+---
+
+`helm pull local-repo/second-chart`
+Pulls chart from local-repo with .tgz extension.
+
+`helm repo add gitrepo https://abhilashindulkar.github.io/githelmrepo`
+Adds git repo to the list of chart repositories.
+
+---
+`export HELM_EXPERIMENTAL_OCI=1`
+Enables OCI.
+
+`docker run -d --name oci-registry -p 5000:5000 registry`
+Runs OCI registry as container on docker environment.
+
+`helm push demo-chart-0.1.tar.gz oci://localhost:5000/helm-charts`
+Push packaged chart to OCI registry named helm-charts.
+
+`helm pull oci://localhost:5000/helm-charts/second-chart --version 0.1.0`
+Pulls second chart from OCI registry to local.
+
+ `helm install second-chart oci://localhost:6000/helm-charts/second-chart --version 0.1.0`
+ Installs second-chart through OCI registry with specified chart version.
+
+ ---
+
+ ##### Chart Security
+
+ PGP - Pretty Good Privacy.
+ GPG - GNU Private Guard, open source implementation of PGP for encrypting files. Provides digital encryption & signing services using OpenPGP standard.
+
+`gpg --version`
+
+gpg (GnuPG) 2.2.27
+libgcrypt 1.9.4
+
+`gpg --full-generate-key`
+Generate encryption keys.
+
+`gpg --export-secret-keys > cust-secring.gpg`
+Export kbx extensioned keys to secring.gpg in ~/.gnupg/ directory.
+
+`helm package --sign --key user@goog.com --keyring ~/.gnupg/cust-secring.gpg new-chart -d charts-repo`
+Packages helm chart under chart-repo directory, encrypts with GNUPG private key. Also creates provenance file that digital signature.
+
+`helm verify chart-repo/new-chart-0.1.0.tgz --keyring ~/.gnupg/cust-secring.gpg`
+Verifies digital signature of Packaged chart.
+
+`helm install --verify --keyring ~/.gnupg/cust-secring.gpg new-chart localrepo/new-chart`
+Verifies Helm chart's digital signature, Installs at the same time.
