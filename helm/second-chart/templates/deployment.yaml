@@ -1,41 +1,16 @@
-# Practice Start below kind.
 apiVersion: apps/v1
 kind: Deployment
-  tempData: {{- include "demo-chart.myTemplate" . }}
-{{- if .Values.mydata.flag -}}
-{{- "Print secret data" -}}
-{{- with .Values.mydata.keywords }}
-keywords:
-  {{- toYaml . | nindent 2 }}
-{{- end }}
-{{- else }}
-{{ .Values.mydata.data | nindent 2 }}
-{{- end }}
-
-{{- $sDT:= .Values.somemoredata -}}
-{{- $sDT }}
-
-countriesofDeployment:
-{{- range .Values.loopdata }}
-  - {{ . | upper | quote }}
-{{- end }}
-
-{{- range $key,$value := .Values.image }}
-  - {{ $key }}: {{ $value | upper}}
-{{- end }}
-# Practice End.
-
 metadata:
-  name: {{ include "demo-chart.fullname" . }}
+  name: {{ include "second-chart.fullname" . }}
   labels:
-    {{- include "demo-chart.labels" . | nindent 4 }}
+    {{- include "second-chart.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "demo-chart.selectorLabels" . | nindent 6 }}
+      {{- include "second-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -43,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "demo-chart.selectorLabels" . | nindent 8 }}
+        {{- include "second-chart.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "demo-chart.serviceAccountName" . }}
+      serviceAccountName: {{ include "second-chart.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

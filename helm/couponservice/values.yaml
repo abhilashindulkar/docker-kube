@@ -1,34 +1,15 @@
-# Default values for demo-chart.
+# Default values for couponservice.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-
-mysql:
-  enabled: false
-
-mydata:
-  data: secret
-  flag: false
-  keywords: somevalue
-
-tags:
-  enabled: false
-
-somemoredata: "this is good stuff"
-newdata: "i like helm"
-
-loopdata:
-- usa
-- uae
-- ind
-- aus
 
 replicaCount: 1
 
 image:
-  repository: nginx
+  registry: docker.io
+  repository: bharatht19/couponservice
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -36,7 +17,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
@@ -57,8 +38,10 @@ securityContext: {}
 # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
+  type: NodePort
+  port: 9091
+  targetPort: 9091
+  nodePort: 32761
 
 ingress:
   enabled: false
@@ -100,3 +83,17 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+mysql:
+  auth:
+    rootPassword: test1234
+    database: mydb
+  primary:
+    service:
+      type: NodePort
+      ports:
+        mysql: 3306
+      nodePorts:
+        mysql: 32762
+  fullnameOverride: docker-mysql
+  initdbScriptsConfigMap: mysql-initdb-config
