@@ -1,0 +1,5 @@
+name: "echoplugin"
+version: "1.0.0"
+description: "Simple echo custom plugin"
+usage: "helm echoplugin"
+command: "echo The plugin $HELM_PLUGIN_NAME is located in $HELM_PLUGIN_DIR"
