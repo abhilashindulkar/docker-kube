@@ -5,7 +5,7 @@
   "default": {},
   "generatedthrough": [
     "https://www.json2yaml.com/",
-    "https: //www.jsonschema.net/"
+    "https://www.jsonschema.net/"
   ],
   "title": "Values Validator Schema",
   "required": [
