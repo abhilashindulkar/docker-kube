@@ -201,3 +201,39 @@ Verifies digital signature of Packaged chart.
 
 `helm install --verify --keyring ~/.gnupg/cust-secring.gpg new-chart localrepo/new-chart`
 Verifies Helm chart's digital signature, Installs at the same time.
+
+---
+
+##### Howto - Starters
+
+`helm env HELM_DATA_HOME`
+Gets the directory where starters are stored.
+Example - /home/abhilash/.local/share/helm. Create a helm directory if it doesn not exist and within it, a subdirectory called starters.
+
+Move a chart (reusable) to starters directory. Rename it if necessary. Replace all the manifest files chart name reference with <CHARTNAME> as a placeholder. Once done, save all the files.
+
+`helm create --starter starter-reusable-chart demo-chart`
+Uses starter chart to create demo-chart.
+
+---
+
+##### Howto - Plugins
+
+`helm plugin list`
+List all plugins. A Plugin has to defined with usage, executable command.
+
+`helm plugin install plugin-name`
+Installs an existing plugin. To install a custom one, specify a path to plugin.yaml file.
+Example - 
+```
+helm plugin install .
+Installed plugin: echoplugin
+
+helm echoplugin 
+The plugin echoplugin is located in /home/abhilash/.local/share/helm/plugins/custom-plugin
+```
+`helm plugin update plugin-name`
+Updates a plugin.
+
+`helm plugin remove plugin-name`
+Removes/Deletes a plugin.
