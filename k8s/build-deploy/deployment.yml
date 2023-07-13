@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linux-tweet-app
+  namespace: develop
+spec:
+  selector:
+    matchLabels:
+      app: linux-tweet-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: linux-tweet-app
+    spec:
+      containers:
+      - name: linux-tweet-app-container
+        image: abhilashindulkar/linux-tweet-app:v0.01
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+      initContainers:
+      - name: kaniko
+        image: gcr.io/kaniko-project/executor:latest
+        args:
+        - --context=dir:///kaniko/build-context
+        - --dockerfile=/kaniko/build-context/Dockerfile
+        - --destination=your-registry/your-repo/my-app:latest
+        volumeMounts:
+        - name: kaniko-context
+          mountPath: /kaniko/build-context
+      volumes:
+      - name: kaniko-context
+        emptyDir: {}
+      imagePullSecrets:
+      - name: registrycreds
