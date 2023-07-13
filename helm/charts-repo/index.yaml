@@ -1,25 +1,18 @@
 apiVersion: v1
 entries:
-  new-chart:
+  linux-tweet-app:
   - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2023-07-04T19:10:05.531257407+05:30"
-    description: A Helm chart for Kubernetes
-    digest: 22bb1173b1e6e26b917229e2003e61ba859be8dfd0b0249c3120cd00595255a3
-    name: new-chart
+    appVersion: v1.0.0
+    created: "2023-07-13T19:04:46.691438712+05:30"
+    description: A Helm chart for linux-tweet-app deployment.
+    digest: 1f006af59b78cca222933082543eff8cce89553cf2059a417ca9de31eddd553d
+    icon: https://cncf-branding.netlify.app/img/projects/helm/horizontal/color/helm-horizontal-color.svg
+    maintainers:
+    - email: abhilash@xyz.com
+      name: Abhilash Indulkar
+    name: linux-tweet-app
     type: application
     urls:
-    - new-chart-0.1.0.tgz
+    - linux-tweet-app-0.1.0.tgz
     version: 0.1.0
-  second-chart:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2023-07-04T19:10:05.531786726+05:30"
-    description: A Helm chart for Kubernetes
-    digest: d4d9a9c258671cf8a36947a4eaffe4a4457dc8764ecff3890e0cfa6f3f6fe569
-    name: second-chart
-    type: application
-    urls:
-    - second-chart-0.1.0.tgz
-    version: 0.1.0
-generated: "2023-07-04T19:10:05.53058739+05:30"
+generated: "2023-07-13T19:04:46.690859872+05:30"

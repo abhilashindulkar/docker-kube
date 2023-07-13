@@ -1,16 +1,10 @@
 apiVersion: v2
-name: demo-chart
-description: A Helm chart for Kubernetes
-
-icon: https://github.com/image.svg
-
-home: https://www.google.com/
-
-sources:
-- "www.example.com"
+name: linux-tweet-app
+description: A Helm chart for linux-tweet-app deployment.
+icon: https://cncf-branding.netlify.app/img/projects/helm/horizontal/color/helm-horizontal-color.svg
 
 maintainers:
-- name: Abhilash
+- name: Abhilash Indulkar
   email: abhilash@xyz.com
 
 # A chart can be either an 'application' or a 'library' chart.
@@ -32,20 +26,4 @@ version: 0.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "1.16.0"
-
-dependencies:
-- name: mysql
-  version: "~ 9.10.0"
-  repository: https://charts.bitnami.com/bitnami
-  # repository: @bitnami
-  condition: mysql.enabled
-- name: apache
-  version: "~ 9.6.3"
-  repository: https://charts.bitnami.com/bitnami
-  tags:
-  - enabled
-  import-values:
-  - child: primary.service
-    parent: mysqlService
-
+appVersion: "v1.0.0"
