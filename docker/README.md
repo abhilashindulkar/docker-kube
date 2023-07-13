@@ -7,7 +7,7 @@ It's mostly used as a sample application for Docker deployment.
 To use it:
 
 * Build:
-`docker build -t linux-tweet-app:v0.0.1 .`
+`docker build -f docker/Dockerfile -t linux-tweet-app:v0.0.1 .`
 
 * Run:
 `docker container run -d -p 80:80 --name=linux-tweet-app linux-tweet-app:v0.0.1`
