@@ -2,9 +2,12 @@
 
 This is very simple NGINX website that allows a user to send a tweet. 
 
-It's mostly used as a sample application for Docker deployment. 
+It's mostly used as a sample application for Docker deployment.
 
-To use it:
+1. Manual
+2. docker-compose
+
+*Manual*
 
 * Build:
 `docker build -f docker/Dockerfile -t linux-tweet-app:v0.0.1 .`
@@ -31,4 +34,24 @@ To delete specific container: `docker rm -f <container-id>`
 
 To remove all running/stopped containers: `docker container prune`
 
+---
+
+*docker-compose*
+
+* Deploy:
+`docker-compose up -d`
+
+* Check logs:
+`docker-compose logs linux-tweet-app`
+
+* Exec into container:
+`docker-compose exec linux-tweet-app bash`
+
+* Stop/Start container:
+`docker-compose stop/start linux-tweet-app`
+
+* Kill/Remove container:
+`docker-compose kill/rm linux-tweet-app`
+
 __NOTE__ - Refer deployed_image.png for successful deployed image.
+

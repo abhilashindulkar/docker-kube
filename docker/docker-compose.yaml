@@ -1,0 +1,15 @@
+version: '3'
+services:
+  linux-tweet-app:
+    image: abhilashindulkar/linux-tweet-app:v0.01
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+    # environment:
+    #   - key=value
+    ports:
+      - 80:80
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      timeout: 10s
