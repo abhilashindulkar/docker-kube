@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linux-tweet-app
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: tweet
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tweet
+    spec:
+      containers:
+      - name: linux-tweet-app-container
+        image: abhilashindulkar/linux-tweet-app:v0.01
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          failureThreshold: 100
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        readinessProbe:
+          failureThreshold: 100
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+      imagePullSecrets:
+      - name: registrycreds

@@ -1,27 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: linux-tweet-app
+  name: tomcat-sample-webapp
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: linux-tweet-app
+      app: webapp
   replicas: 1
   template:
     metadata:
       labels:
-        app: linux-tweet-app
+        app: webapp
     spec:
       containers:
-      - name: linux-tweet-app-container
-        image: abhilashindulkar/linux-tweet-app:v0.01
+      - name: tomcat-webapp-container
+        image: abhilashindulkar/tomcat-sample-app
         imagePullPolicy: IfNotPresent
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 80
-      imagePullSecrets:
-      - name: registrycreds
+        - containerPort: 8080
