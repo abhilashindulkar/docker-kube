@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - base/
+  - dev/
+  - uat/
+  - prd/
+
+commonLabels:
+  deploy: Kustomization
+
+commonAnnotations:
+  branch: main

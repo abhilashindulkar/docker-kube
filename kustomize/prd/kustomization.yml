@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../base/
+
+namespace: prd
+
+images:
+  - name: linux-tweet-app-container
+    newName: linux-tweet-app-prd
+    newTag: "abhilashindulkar/linux-tweet-app:v0.02"
+
+commonLabels:
+  environment: production
+
+nameSuffix: -prd
