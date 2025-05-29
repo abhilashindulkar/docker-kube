@@ -13,5 +13,5 @@ This is very simple NGINX website that allows a user to send a tweet.
   - [ ] Through kaniko image build tool.
   - [x] Deploy with Ingress.
 - [x] Helm Chart
-- [ ] Kustomize
+- [x] Kustomize
 - [ ] Skaffold
