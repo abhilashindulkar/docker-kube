@@ -7,8 +7,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    nodePort: 30007
     targetPort: 80
   selector:
     app: linux-tweet-app
-    type: backend

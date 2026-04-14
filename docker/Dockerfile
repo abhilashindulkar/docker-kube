@@ -1,14 +1,13 @@
-FROM nginx:1.23
+FROM nginx:1.27-alpine
 
-LABEL author="abhilash indulkar"
+LABEL author="Abhilash Indulkar"
 
 WORKDIR /usr/share/nginx/html
 
 COPY src/ .
 
-# COPY ../src/index.html /usr/share/nginx/html
-# COPY ../src/linux.png /usr/share/nginx/html
+EXPOSE 80
 
-EXPOSE 80 443 	
+USER nginx
 
 CMD ["nginx", "-g", "daemon off;"]

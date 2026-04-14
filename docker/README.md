@@ -51,5 +51,3 @@ To remove all running/stopped containers: `docker container prune`
 * Kill/Remove container:
 `docker-compose kill/rm linux-tweet-app`
 
-__NOTE__ - Refer deployed_image.png for successful deployed image.
-

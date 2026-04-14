@@ -7,9 +7,9 @@ resources:
 namespace: prd
 
 images:
-  - name: linux-tweet-app-container
-    newName: linux-tweet-app-prd
-    newTag: "abhilashindulkar/linux-tweet-app:v0.02"
+  - name: abhilashindulkar/linux-tweet-app
+    newName: abhilashindulkar/linux-tweet-app
+    newTag: "v0.02"
 
 commonLabels:
   environment: production

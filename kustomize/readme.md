@@ -1,23 +1,27 @@
 ### Kustomize
 
-Commands
+Build and apply overlays per environment. Do not apply all environments at once.
 
-1. kustomize build - lists all the k8s manifests and kustomization file configs, combines/transforms the manifests. It gives stdout result; doesn't apply/update/delete the configs.
+**Preview manifests** (dry-run, stdout only):
 
-`kustomize build k8s/` 
+```bash
+kustomize build kustomize/dev/
+kustomize build kustomize/uat/
+kustomize build kustomize/prd/
+```
 
-2. Apply configs to k8s environment -
+**Apply to cluster:**
 
-`kustomize build k8s/ | kubectl apply -f -`
+```bash
+kustomize build kustomize/dev/ | kubectl apply -f -
+# or
+kubectl apply -k kustomize/dev/
+```
 
-or
+**Delete resources:**
 
-`kubectl apply -k k8s/`
-
-3. Delete the resources -
-
-`kustomize build k8s/ | kubectl delete -f -`
-
-or
-
-`kubectl delete -k k8s/`
+```bash
+kustomize build kustomize/dev/ | kubectl delete -f -
+# or
+kubectl delete -k kustomize/dev/
+```

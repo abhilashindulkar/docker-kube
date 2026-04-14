@@ -5,7 +5,7 @@ icon: https://cncf-branding.netlify.app/img/projects/helm/horizontal/color/helm-
 
 maintainers:
 - name: Abhilash Indulkar
-  email: abhilash@xyz.com
+  url: https://github.com/abhilashindulkar
 
 # A chart can be either an 'application' or a 'library' chart.
 #

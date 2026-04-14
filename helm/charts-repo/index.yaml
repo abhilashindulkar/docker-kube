@@ -8,8 +8,8 @@ entries:
     digest: 1f006af59b78cca222933082543eff8cce89553cf2059a417ca9de31eddd553d
     icon: https://cncf-branding.netlify.app/img/projects/helm/horizontal/color/helm-horizontal-color.svg
     maintainers:
-    - email: abhilash@xyz.com
-      name: Abhilash Indulkar
+    - name: Abhilash Indulkar
+      url: https://github.com/abhilashindulkar
     name: linux-tweet-app
     type: application
     urls:

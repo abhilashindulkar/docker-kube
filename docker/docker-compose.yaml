@@ -1,15 +1,14 @@
-version: '3'
 services:
   linux-tweet-app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     image: abhilashindulkar/linux-tweet-app:v0.01
     restart: unless-stopped
-    deploy:
-      mode: replicated
-      replicas: 1
-    # environment:
-    #   - key=value
     ports:
-      - 80:80
+      - "80:80"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:80/"]
+      interval: 30s
       timeout: 10s
+      retries: 3

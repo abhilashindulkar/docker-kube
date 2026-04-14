@@ -18,28 +18,29 @@ spec:
         image: abhilashindulkar/linux-tweet-app:v0.01
         imagePullPolicy: IfNotPresent
         resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
         - containerPort: 80
         livenessProbe:
-          failureThreshold: 100
           httpGet:
             path: /
             port: 80
-            scheme: HTTP
-          periodSeconds: 30
-          successThreshold: 1
-          timeoutSeconds: 10
+          initialDelaySeconds: 10
+          periodSeconds: 15
+          failureThreshold: 3
+          timeoutSeconds: 5
         readinessProbe:
-          failureThreshold: 100
           httpGet:
             path: /
             port: 80
-            scheme: HTTP
-          periodSeconds: 30
-          successThreshold: 1
-          timeoutSeconds: 10
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 5
+          timeoutSeconds: 5
       imagePullSecrets:
       - name: registrycreds
