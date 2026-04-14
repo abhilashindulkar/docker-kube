@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kaniko-build
+  namespace: develop
+spec:
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 300
+  template:
+    metadata:
+      labels:
+        app: kaniko-build
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: kaniko
+        image: gcr.io/kaniko-project/executor:v1.23.2
+        args:
+        - --context=git://github.com/abhilashindulkar/docker-kube.git#refs/heads/main
+        - --context-sub-path=.
+        - --dockerfile=docker/Dockerfile
+        - --destination=abhilashindulkar/linux-tweet-app:v0.01
+        - --cache=true
+        - --cache-ttl=24h
+        - --snapshot-mode=redo
+        - --log-format=text
+        volumeMounts:
+        - name: docker-config
+          mountPath: /kaniko/.docker
+      volumes:
+      - name: docker-config
+        secret:
+          secretName: docker-config
+          items:
+          - key: .dockerconfigjson
+            path: config.json

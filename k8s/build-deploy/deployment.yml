@@ -16,7 +16,7 @@ spec:
       containers:
       - name: linux-tweet-app-container
         image: abhilashindulkar/linux-tweet-app:v0.01
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "64Mi"
@@ -26,5 +26,12 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
       imagePullSecrets:
-      - name: registrycreds
+      - name: docker-config
