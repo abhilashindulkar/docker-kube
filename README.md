@@ -14,4 +14,4 @@ This is very simple NGINX website that allows a user to send a tweet.
   - [x] Deploy with Ingress.
 - [x] Helm Chart
 - [x] Kustomize
-- [ ] Skaffold
+- [x] Skaffold

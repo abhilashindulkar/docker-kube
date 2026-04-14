@@ -1,0 +1,54 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: linux-tweet-app
+
+build:
+  artifacts:
+  - image: abhilashindulkar/linux-tweet-app
+    context: ..
+    docker:
+      dockerfile: docker/Dockerfile
+
+profiles:
+  - name: dev
+    deploy:
+      kubectl:
+        defaultNamespace: develop
+        manifests:
+        - manifests/namespace.yml
+        - manifests/deployment.yml
+        - manifests/service.yml
+
+  - name: helm
+    deploy:
+      helm:
+        releases:
+        - name: linux-tweet-app
+          chartPath: ../helm/linux-tweet-app
+          namespace: develop
+          createNamespace: true
+          setValues:
+            image.repository: abhilashindulkar/linux-tweet-app
+            image.tag: ""
+
+  - name: kaniko
+    build:
+      cluster:
+        dockerConfig:
+          secretName: docker-config
+        namespace: develop
+      artifacts:
+      - image: abhilashindulkar/linux-tweet-app
+        context: ..
+        docker:
+          dockerfile: docker/Dockerfile
+        kaniko:
+          cache:
+            repo: abhilashindulkar/linux-tweet-app/cache
+    deploy:
+      kubectl:
+        defaultNamespace: develop
+        manifests:
+        - manifests/deployment.yml
+        - manifests/service.yml
