@@ -1,53 +1,81 @@
-## Linux Tweet App Deployment through Docker
+## Linux Tweet App — Docker Deployment
 
-It's mostly used as a sample application for Docker deployment.
+Two ways to run the app locally: manually with Docker CLI or with docker-compose.
 
-1. Manual
-2. docker-compose
-
-*Manual*
-
-* Build:
-`docker build -f docker/Dockerfile -t linux-tweet-app:v0.0.1 .`
-
-* Run:
-`docker container run -d -p 80:80 --name=linux-tweet-app linux-tweet-app:v0.0.1`
-
-*Few Commands*:
-
-* View:
-To view image: `docker images` or `docker image ls`
-
-To view containers (running/stopped): `docker ps -a`
-
-* Tag/Pull/Push:
-To tag the image: `docker tag linux-tweet-app:v0.01 abhilashindulkar/linux-tweet-app:v0.01`
-
-To pull the image: `docker pull abhilashindulkar/linux-tweet-app:v0.01`
-
-To push the image: `docker push abhilashindulkar/linux-tweet-app:v0.01`
-
-* Cleanup:
-To delete specific container: `docker rm -f <container-id>`
-
-To remove all running/stopped containers: `docker container prune`
+> All commands should be run from the **repository root**, not from the `docker/` directory (the build context is the repo root).
 
 ---
 
-*docker-compose*
+### Manual
 
-* Deploy:
-`docker-compose up -d`
+**Build:**
 
-* Check logs:
-`docker-compose logs linux-tweet-app`
+```bash
+docker build -f docker/Dockerfile -t linux-tweet-app:v0.0.1 .
+```
 
-* Exec into container:
-`docker-compose exec linux-tweet-app bash`
+**Run:**
 
-* Stop/Start container:
-`docker-compose stop/start linux-tweet-app`
+```bash
+docker container run -d -p 80:80 --name=linux-tweet-app linux-tweet-app:v0.0.1
+```
 
-* Kill/Remove container:
-`docker-compose kill/rm linux-tweet-app`
+**Useful commands:**
 
+```bash
+# List images
+docker images
+
+# List containers (running and stopped)
+docker ps -a
+
+# Tag for Docker Hub
+docker tag linux-tweet-app:v0.0.1 abhilashindulkar/linux-tweet-app:v0.0.1
+
+# Push to Docker Hub
+docker push abhilashindulkar/linux-tweet-app:v0.0.1
+
+# Pull from Docker Hub
+docker pull abhilashindulkar/linux-tweet-app:v0.0.1
+
+# Remove a specific container
+docker rm -f <container-id>
+
+# Remove all stopped containers
+docker container prune
+```
+
+---
+
+### docker-compose
+
+**Deploy:**
+
+```bash
+docker-compose -f docker/docker-compose.yaml up -d
+```
+
+**Check logs:**
+
+```bash
+docker-compose -f docker/docker-compose.yaml logs linux-tweet-app
+```
+
+**Exec into container:**
+
+```bash
+docker-compose -f docker/docker-compose.yaml exec linux-tweet-app sh
+```
+
+**Stop / Start:**
+
+```bash
+docker-compose -f docker/docker-compose.yaml stop linux-tweet-app
+docker-compose -f docker/docker-compose.yaml start linux-tweet-app
+```
+
+**Tear down:**
+
+```bash
+docker-compose -f docker/docker-compose.yaml down
+```

@@ -39,7 +39,7 @@ Builds the Docker image inside the cluster using [Kaniko](https://github.com/Goo
 
 **How it works:**
 
-1. A Kaniko `Job` clones the repo via `--context=git://`, builds from `docker/Dockerfile`, and pushes to `abhilashindulkar/linux-tweet-app:v0.01`
+1. A Kaniko `Job` clones the repo via `--context=https://`, builds from `docker/Dockerfile`, and pushes to `abhilashindulkar/linux-tweet-app:v0.0.1`
 2. A `Deployment` pulls that image and serves the app
 3. A `Service` (LoadBalancer) exposes port 80
 
