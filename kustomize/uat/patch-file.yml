@@ -1,20 +1,6 @@
-## json 6902 patch
-
-# patches:
-# - target:
-#     kind: Deployment
-#     name: linux-tweet-app
-#   patches: |-
-#     - op: replace
-#       path: /metadata/name
-#       value: linux-tweet-patch
-
-# strategic merge patch
-
-patches:
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: linux-tweet-patch
-        
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linux-tweet-app
+spec:
+  replicas: 2

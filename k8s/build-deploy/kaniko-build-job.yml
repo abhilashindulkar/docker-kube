@@ -16,10 +16,10 @@ spec:
       - name: kaniko
         image: gcr.io/kaniko-project/executor:v1.23.2
         args:
-        - --context=git://github.com/abhilashindulkar/docker-kube.git#refs/heads/main
+        - --context=https://github.com/abhilashindulkar/docker-kube.git#refs/heads/main
         - --context-sub-path=.
         - --dockerfile=docker/Dockerfile
-        - --destination=abhilashindulkar/linux-tweet-app:v0.01
+        - --destination=abhilashindulkar/linux-tweet-app:v0.0.1
         - --cache=true
         - --cache-ttl=24h
         - --snapshot-mode=redo

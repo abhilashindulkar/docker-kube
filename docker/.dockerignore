@@ -1,1 +1,14 @@
-deployed_image.png
+.git
+.gitignore
+.gitattributes
+*.md
+LICENSE
+docker/
+helm/
+k8s/
+kustomize/
+skaffold/
+*.png
+*.jpg
+*.jpeg
+*.gif

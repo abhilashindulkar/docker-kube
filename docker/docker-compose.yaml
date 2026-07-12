@@ -3,7 +3,7 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    image: abhilashindulkar/linux-tweet-app:v0.01
+    image: abhilashindulkar/linux-tweet-app:v0.0.1
     restart: unless-stopped
     ports:
       - "80:80"

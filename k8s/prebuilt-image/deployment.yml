@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: linux-tweet-app-container
-        image: abhilashindulkar/linux-tweet-app:v0.01
+        image: abhilashindulkar/linux-tweet-app:v0.0.1
         imagePullPolicy: IfNotPresent
         resources:
           requests:
@@ -26,5 +26,21 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 15
+          failureThreshold: 3
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 5
+          timeoutSeconds: 5
       imagePullSecrets:
       - name: registrycreds

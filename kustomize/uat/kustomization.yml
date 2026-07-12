@@ -9,8 +9,11 @@ resources:
   # - deployment.yml
   # - service.yml
 
-# patches:
-#   - patch-file.yml
+patches:
+  - path: patch-file.yml
+    target:
+      kind: Deployment
+      name: linux-tweet-app
 
 namespace: uat
 

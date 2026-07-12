@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: linux-tweet-app-container
-        image: abhilashindulkar/linux-tweet-app:v0.01
+        image: abhilashindulkar/linux-tweet-app:v0.0.1
         imagePullPolicy: IfNotPresent
         resources:
           requests:

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: tomcat-webapp-container
-        image: abhilashindulkar/tomcat-sample-app
+        image: abhilashindulkar/tomcat-sample-app:latest
         imagePullPolicy: IfNotPresent
         resources:
           requests:
